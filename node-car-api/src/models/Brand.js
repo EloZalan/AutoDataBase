@@ -1,4 +1,4 @@
-const { mongoose } = require('../db');
+import mongoose from 'mongoose';
 
 const BrandSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
@@ -6,4 +6,4 @@ const BrandSchema = new mongoose.Schema({
     founded: { type: Number }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Brand', BrandSchema);
+export default mongoose.model('Brand', BrandSchema, 'autok');

@@ -1,10 +1,6 @@
-const Brand = require('../models/Brand');
+import Brand from '../models/Brand.js';
 
 class BrandsController {
-    constructor(brandsService) {
-        this.brandsService = brandsService;
-    }
-
     async getAllBrands(req, res) {
         try {
             const brands = await Brand.find();
@@ -54,4 +50,9 @@ class BrandsController {
     }
 }
 
-module.exports = BrandsController;
+const controller = new BrandsController();
+export const getAllBrands = controller.getAllBrands.bind(controller);
+export const getBrandById = controller.getBrandById.bind(controller);
+export const createBrand = controller.createBrand.bind(controller);
+export const updateBrand = controller.updateBrand.bind(controller);
+export const deleteBrand = controller.deleteBrand.bind(controller);

@@ -1,7 +1,7 @@
-const express = require('express');
-const brandsRoutes = require('./routes/brands');
-const typesRoutes = require('./routes/types');
-const db = require('./db');
+import express from 'express';
+import brandsRoutes from './routes/brands.js';
+import typesRoutes from './routes/types.js';
+import * as db from './db.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;

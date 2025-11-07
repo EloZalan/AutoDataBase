@@ -1,9 +1,6 @@
-const Type = require('../models/Type');
+import Type from '../models/Type.js';
 
 class TypesController {
-    constructor(typesService) {
-        this.typesService = typesService;
-    }
 
     async getAllTypes(req, res) {
         try {
@@ -54,4 +51,9 @@ class TypesController {
     }
 }
 
-export default TypesController;
+const controller = new TypesController();
+export const getAllTypes = controller.getAllTypes.bind(controller);
+export const getTypeById = controller.getTypeById.bind(controller);
+export const createType = controller.createType.bind(controller);
+export const updateType = controller.updateType.bind(controller);
+export const deleteType = controller.deleteType.bind(controller);

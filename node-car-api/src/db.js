@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://m001-student:student01@cluster0.fhwvjka.mongodb.net/auto';
 
-async function connect() {
+export async function connect() {
     try {
         await mongoose.connect(MONGO_URI, {
             useNewUrlParser: true,
@@ -15,4 +15,4 @@ async function connect() {
     }
 }
 
-module.exports = { connect, mongoose };
+export { mongoose };

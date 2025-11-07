@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
+import * as controller from '../controllers/typesController.js';
 const router = express.Router();
-const controller = require('../controllers/typesController');
 
-router.get('/', controller.getAll);
-router.get('/:id', controller.getById);
-router.post('/', controller.create);
-router.put('/:id', controller.update);
-router.delete('/:id', controller.remove);
+router.get('/', controller.getAllTypes);
+router.get('/:id', controller.getTypeById);
+router.post('/', controller.createType);
+router.put('/:id', controller.updateType);
+router.delete('/:id', controller.deleteType);
 
-module.exports = router;
+export default router;

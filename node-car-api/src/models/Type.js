@@ -1,4 +1,4 @@
-const { mongoose } = require('../db');
+import mongoose from 'mongoose';
 
 const TypeSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -7,4 +7,4 @@ const TypeSchema = new mongoose.Schema({
     specs: { type: Object }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Type', TypeSchema);
+export default mongoose.model('Type', TypeSchema);
