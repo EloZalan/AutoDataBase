@@ -1,3 +1,5 @@
+const Type = require('../models/Type');
+
 class TypesController {
     constructor(typesService) {
         this.typesService = typesService;
@@ -5,63 +7,49 @@ class TypesController {
 
     async getAllTypes(req, res) {
         try {
-            const types = await this.typesService.getAllTypes();
-            res.status(200).json(types);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const types = await Type.find().populate('brand');
+            res.json(types);
+        } catch (err) {
+            res.status(500).json({ error: 'Failed to fetch types' });
         }
     }
 
     async getTypeById(req, res) {
-        const { id } = req.params;
         try {
-            const type = await this.typesService.getTypeById(id);
-            if (type) {
-                res.status(200).json(type);
-            } else {
-                res.status(404).json({ message: 'Type not found' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const type = await Type.findById(req.params.id).populate('brand');
+            if (!type) return res.status(404).json({ error: 'Type not found' });
+            res.json(type);
+        } catch (err) {
+            res.status(500).json({ error: 'Failed to fetch type' });
         }
     }
 
     async createType(req, res) {
-        const newType = req.body;
         try {
-            const createdType = await this.typesService.createType(newType);
-            res.status(201).json(createdType);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const newType = await Type.create(req.body);
+            res.status(201).json(newType);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
         }
     }
 
     async updateType(req, res) {
-        const { id } = req.params;
-        const updatedType = req.body;
         try {
-            const type = await this.typesService.updateType(id, updatedType);
-            if (type) {
-                res.status(200).json(type);
-            } else {
-                res.status(404).json({ message: 'Type not found' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const updated = await Type.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+            if (!updated) return res.status(404).json({ error: 'Type not found' });
+            res.json(updated);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
         }
     }
 
     async deleteType(req, res) {
-        const { id } = req.params;
         try {
-            const success = await this.typesService.deleteType(id);
-            if (success) {
-                res.status(204).send();
-            } else {
-                res.status(404).json({ message: 'Type not found' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const deleted = await Type.findByIdAndDelete(req.params.id);
+            if (!deleted) return res.status(404).json({ error: 'Type not found' });
+            res.json({ message: 'Type deleted' });
+        } catch (err) {
+            res.status(500).json({ error: 'Failed to delete type' });
         }
     }
 }

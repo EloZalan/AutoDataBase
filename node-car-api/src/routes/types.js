@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const TypesController = require('../controllers/typesController');
+const controller = require('../controllers/typesController');
 
-const typesController = new TypesController();
-
-router.get('/', typesController.getAllTypes.bind(typesController));
-router.get('/:id', typesController.getTypeById.bind(typesController));
-router.post('/', typesController.createType.bind(typesController));
-router.put('/:id', typesController.updateType.bind(typesController));
-router.delete('/:id', typesController.deleteType.bind(typesController));
+router.get('/', controller.getAll);
+router.get('/:id', controller.getById);
+router.post('/', controller.create);
+router.put('/:id', controller.update);
+router.delete('/:id', controller.remove);
 
 module.exports = router;

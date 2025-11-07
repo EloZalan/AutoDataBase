@@ -1,3 +1,5 @@
+const Brand = require('../models/Brand');
+
 class BrandsController {
     constructor(brandsService) {
         this.brandsService = brandsService;
@@ -5,63 +7,49 @@ class BrandsController {
 
     async getAllBrands(req, res) {
         try {
-            const brands = await this.brandsService.getAllBrands();
-            res.status(200).json(brands);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const brands = await Brand.find();
+            res.json(brands);
+        } catch (err) {
+            res.status(500).json({ error: 'Failed to fetch brands' });
         }
     }
 
     async getBrandById(req, res) {
-        const { id } = req.params;
         try {
-            const brand = await this.brandsService.getBrandById(id);
-            if (brand) {
-                res.status(200).json(brand);
-            } else {
-                res.status(404).json({ message: 'Brand not found' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const brand = await Brand.findById(req.params.id);
+            if (!brand) return res.status(404).json({ error: 'Brand not found' });
+            res.json(brand);
+        } catch (err) {
+            res.status(500).json({ error: 'Failed to fetch brand' });
         }
     }
 
     async createBrand(req, res) {
-        const newBrand = req.body;
         try {
-            const createdBrand = await this.brandsService.createBrand(newBrand);
-            res.status(201).json(createdBrand);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const newBrand = await Brand.create(req.body);
+            res.status(201).json(newBrand);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
         }
     }
 
     async updateBrand(req, res) {
-        const { id } = req.params;
-        const updatedBrand = req.body;
         try {
-            const brand = await this.brandsService.updateBrand(id, updatedBrand);
-            if (brand) {
-                res.status(200).json(brand);
-            } else {
-                res.status(404).json({ message: 'Brand not found' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const updated = await Brand.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+            if (!updated) return res.status(404).json({ error: 'Brand not found' });
+            res.json(updated);
+        } catch (err) {
+            res.status(400).json({ error: err.message });
         }
     }
 
     async deleteBrand(req, res) {
-        const { id } = req.params;
         try {
-            const deleted = await this.brandsService.deleteBrand(id);
-            if (deleted) {
-                res.status(204).send();
-            } else {
-                res.status(404).json({ message: 'Brand not found' });
-            }
-        } catch (error) {
-            res.status(500).json({ message: error.message });
+            const deleted = await Brand.findByIdAndDelete(req.params.id);
+            if (!deleted) return res.status(404).json({ error: 'Brand not found' });
+            res.json({ message: 'Brand deleted' });
+        } catch (err) {
+            res.status(500).json({ error: 'Failed to delete brand' });
         }
     }
 }
