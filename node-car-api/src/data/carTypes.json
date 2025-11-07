@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "type": "SUV"
+    },
+    {
+        "id": 2,
+        "type": "Sedan"
+    },
+    {
+        "id": 3,
+        "type": "Hatchback"
+    },
+    {
+        "id": 4,
+        "type": "Coupe"
+    },
+    {
+        "id": 5,
+        "type": "Convertible"
+    },
+    {
+        "id": 6,
+        "type": "Pickup"
+    },
+    {
+        "id": 7,
+        "type": "Minivan"
+    }
+]
