@@ -1,0 +1,118 @@
+[
+  {
+    "brand": "Toyota",
+    "model": "Supra GR",
+    "type": "Sports Coupe",
+    "engine": "3.0L Turbocharged Inline-6",
+    "horsepower": 382,
+    "drive": "RWD",
+    "features": ["Adaptive suspension", "Aggressive styling", "BMW platform"],
+    "audience": ["Enthusiasts", "JDM fans"],
+    "special": "Modern revival of the legendary Supra",
+    "_id": "1"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Land Cruiser 300",
+    "type": "Full-Size SUV",
+    "engine": "3.5L Twin-Turbo V6",
+    "drive": "4WD",
+    "features": ["Crawl control", "Multi-terrain select", "Luxury interior"],
+    "audience": ["Adventurers", "Families", "Off-roaders"],
+    "special": "World-renowned off-road durability with premium upgrades",
+    "_id": "1"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla Hybrid",
+    "type": "Compact Sedan",
+    "engine": "1.8L Hybrid",
+    "mpg": 52,
+    "drive": "FWD",
+    "features": ["Toyota Safety Sense", "Efficient hybrid", "Affordable"],
+    "audience": ["Commuters", "Budget buyers"],
+    "special": "The best-selling nameplate, now with hybrid tech",
+    "_id": "1"
+  },
+  {
+    "brand": "Toyota",
+    "model": "RAV4 Prime",
+    "type": "Compact SUV",
+    "engine": "2.5L Plug-in Hybrid",
+    "horsepower": 302,
+    "ev_range_miles": 42,
+    "drive": "AWD",
+    "features": ["Plug-in hybrid", "Electric drive mode", "Sporty power"],
+    "audience": ["Eco-conscious drivers", "Tech-savvy users"],
+    "special": "Powerful plug-in SUV with daily electric driving",
+    "_id": "1"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Tacoma TRD Pro",
+    "type": "Mid-Size Pickup Truck",
+    "engine": "3.5L V6",
+    "drive": "4WD",
+    "features": ["Fox shocks", "Skid plates", "TRD off-road tuning"],
+    "audience": ["Truck lovers", "Outdoor enthusiasts"],
+    "special": "Reliable, rugged, and ready for off-road challenges",
+    "_id": "1"
+  },
+  {
+    "brand": "Volkswagen",
+    "model": "Golf GTI",
+    "type": "Hot Hatchback",
+    "engine": "2.0L Turbocharged I4",
+    "horsepower": 241,
+    "drive": "FWD",
+    "features": ["Sport-tuned suspension", "Digital cockpit", "Manual/DSG options"],
+    "audience": ["Performance hatch lovers", "Young drivers"],
+    "special": "Iconic hot hatch with daily usability and fun handling",
+    "_id": "2"
+  },
+  {
+    "brand": "Volkswagen",
+    "model": "ID.4",
+    "type": "Electric SUV",
+    "engine": "Electric Motor",
+    "range_miles": 275,
+    "drive": "RWD / AWD options",
+    "features": ["Modern infotainment", "Spacious cabin", "EV incentives"],
+    "audience": ["Eco-conscious families", "Tech-savvy drivers"],
+    "special": "VW’s flagship electric SUV for the mass market",
+    "_id": "2"
+  },
+  {
+    "brand": "Volkswagen",
+    "model": "Passat",
+    "type": "Midsize Sedan",
+    "engine": "2.0L Turbocharged I4",
+    "drive": "FWD",
+    "features": ["Spacious interior", "Smooth ride", "Driver assist tech"],
+    "audience": ["Families", "Commuters"],
+    "special": "Comfort-focused sedan with understated style",
+    "_id": "2"
+  },
+  {
+    "brand": "Volkswagen",
+    "model": "Tiguan",
+    "type": "Compact SUV",
+    "engine": "2.0L Turbocharged I4",
+    "drive": "AWD",
+    "features": ["Digital cockpit", "3rd-row option", "LED lights"],
+    "audience": ["Small families", "City drivers"],
+    "special": "Compact SUV with Euro styling and family-friendly practicality",
+    "_id": "2"
+  },
+  {
+    "brand": "Volkswagen",
+    "model": "Amarok",
+    "type": "Pickup Truck",
+    "engine": "3.0L V6 TDI (Diesel)",
+    "drive": "4Motion AWD",
+    "features": ["Ford Ranger base", "Premium interior", "Off-road modes"],
+    "audience": ["Outdoor workers", "Adventure seekers"],
+    "special": "European pickup with modern rugged features",
+    "_id": "2"
+  }
+]

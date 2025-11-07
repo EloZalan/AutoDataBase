@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "1",
+    "name": "Toyota Motor Corporation",
+    "country": "Japan",
+    "founded": 1937,
+    "headquarters": "Toyota City, Aichi, Japan",
+    "specialties": ["Hybrid Technology", "Reliable Sedans", "Off-road Vehicles"],
+    "brands": ["Toyota", "Lexus"]
+  },
+  {
+    "_id": "2",
+    "name": "Volkswagen Group",
+    "country": "Germany",
+    "founded": 1937,
+    "headquarters": "Wolfsburg, Lower Saxony, Germany",
+    "specialties": ["Electric Vehicles", "European Engineering", "Hot Hatches"],
+    "brands": ["Volkswagen", "Audi", "Porsche", "Skoda", "SEAT"]
+  }
+]
