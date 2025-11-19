@@ -1,6 +1,5 @@
 import { jest } from '@jest/globals';
 
-// Mock the Brand model BEFORE importing the controller
 const mockFind = jest.fn();
 const mockFindById = jest.fn();
 const mockCreate = jest.fn();
@@ -17,10 +16,8 @@ jest.unstable_mockModule('../../models/Brand.js', () => ({
     }
 }));
 
-// Import controller AFTER mocking
 const { getAllBrands, getBrandById, createBrand, updateBrand, deleteBrand } = await import('../../controllers/brandsController.js');
 
-// Mock data from carBrands.json
 const mockBrands = [
     {
         _id: "1",
@@ -46,10 +43,8 @@ describe('BrandsController', () => {
     let req, res;
 
     beforeEach(() => {
-        // Reset mocks before each test
         jest.clearAllMocks();
         
-        // Setup request and response objects
         req = {
             params: {},
             body: {}
@@ -63,27 +58,21 @@ describe('BrandsController', () => {
 
     describe('getAllBrands', () => {
         it('should return all brands with status 200', async () => {
-            // Arrange
             mockFind.mockResolvedValue(mockBrands);
 
-            // Act
             await getAllBrands(req, res);
 
-            // Assert
             expect(mockFind).toHaveBeenCalledTimes(1);
             expect(res.json).toHaveBeenCalledWith(mockBrands);
             expect(res.status).not.toHaveBeenCalled();
         });
 
         it('should return 500 error when database fails', async () => {
-            // Arrange
             const errorMessage = 'Database connection failed';
             mockFind.mockRejectedValue(new Error(errorMessage));
 
-            // Act
             await getAllBrands(req, res);
 
-            // Assert
             expect(mockFind).toHaveBeenCalledTimes(1);
             expect(res.status).toHaveBeenCalledWith(500);
             expect(res.json).toHaveBeenCalledWith({ error: 'Failed to fetch brands' });
@@ -92,41 +81,32 @@ describe('BrandsController', () => {
 
     describe('getBrandById', () => {
         it('should return a brand by id with status 200', async () => {
-            // Arrange
             req.params.id = '1';
             mockFindById.mockResolvedValue(mockBrands[0]);
 
-            // Act
             await getBrandById(req, res);
 
-            // Assert
             expect(mockFindById).toHaveBeenCalledWith('1');
             expect(res.json).toHaveBeenCalledWith(mockBrands[0]);
         });
 
         it('should return 404 when brand not found', async () => {
-            // Arrange
             req.params.id = '999';
             mockFindById.mockResolvedValue(null);
 
-            // Act
             await getBrandById(req, res);
 
-            // Assert
             expect(mockFindById).toHaveBeenCalledWith('999');
             expect(res.status).toHaveBeenCalledWith(404);
             expect(res.json).toHaveBeenCalledWith({ error: 'Brand not found' });
         });
 
         it('should return 500 error when database fails', async () => {
-            // Arrange
             req.params.id = '1';
             mockFindById.mockRejectedValue(new Error('Database error'));
 
-            // Act
             await getBrandById(req, res);
 
-            // Assert
             expect(res.status).toHaveBeenCalledWith(500);
             expect(res.json).toHaveBeenCalledWith({ error: 'Failed to fetch brand' });
         });
@@ -134,7 +114,6 @@ describe('BrandsController', () => {
 
     describe('createBrand', () => {
         it('should create a new brand with status 201', async () => {
-            // Arrange
             const newBrand = {
                 name: "BMW Group",
                 country: "Germany",
@@ -144,26 +123,21 @@ describe('BrandsController', () => {
             req.body = newBrand;
             mockCreate.mockResolvedValue(createdBrand);
 
-            // Act
             await createBrand(req, res);
 
-            // Assert
             expect(mockCreate).toHaveBeenCalledWith(newBrand);
             expect(res.status).toHaveBeenCalledWith(201);
             expect(res.json).toHaveBeenCalledWith(createdBrand);
         });
 
         it('should return 400 error when validation fails', async () => {
-            // Arrange
-            const invalidBrand = { country: "USA" }; // missing required name
+            const invalidBrand = { country: "USA" }; 
             req.body = invalidBrand;
             const validationError = new Error('name is required');
             mockCreate.mockRejectedValue(validationError);
 
-            // Act
             await createBrand(req, res);
 
-            // Assert
             expect(res.status).toHaveBeenCalledWith(400);
             expect(res.json).toHaveBeenCalledWith({ error: validationError.message });
         });
@@ -171,17 +145,16 @@ describe('BrandsController', () => {
 
     describe('updateBrand', () => {
         it('should update a brand and return it with status 200', async () => {
-            // Arrange
+
             req.params.id = '1';
             const updateData = { country: "Japan Updated" };
             req.body = updateData;
             const updatedBrand = { ...mockBrands[0], ...updateData };
             mockFindByIdAndUpdate.mockResolvedValue(updatedBrand);
 
-            // Act
             await updateBrand(req, res);
 
-            // Assert
+
             expect(mockFindByIdAndUpdate).toHaveBeenCalledWith(
                 '1',
                 updateData,
@@ -191,30 +164,25 @@ describe('BrandsController', () => {
         });
 
         it('should return 404 when brand not found', async () => {
-            // Arrange
             req.params.id = '999';
             req.body = { name: "Updated Name" };
             mockFindByIdAndUpdate.mockResolvedValue(null);
 
-            // Act
+            
             await updateBrand(req, res);
 
-            // Assert
             expect(res.status).toHaveBeenCalledWith(404);
             expect(res.json).toHaveBeenCalledWith({ error: 'Brand not found' });
         });
 
         it('should return 400 error when validation fails', async () => {
-            // Arrange
             req.params.id = '1';
-            req.body = { name: "" }; // invalid name
+            req.body = { name: "" }; 
             const validationError = new Error('name cannot be empty');
             mockFindByIdAndUpdate.mockRejectedValue(validationError);
 
-            // Act
             await updateBrand(req, res);
 
-            // Assert
             expect(res.status).toHaveBeenCalledWith(400);
             expect(res.json).toHaveBeenCalledWith({ error: validationError.message });
         });
@@ -222,40 +190,32 @@ describe('BrandsController', () => {
 
     describe('deleteBrand', () => {
         it('should delete a brand and return success message', async () => {
-            // Arrange
             req.params.id = '1';
             mockFindByIdAndDelete.mockResolvedValue(mockBrands[0]);
 
-            // Act
             await deleteBrand(req, res);
 
-            // Assert
             expect(mockFindByIdAndDelete).toHaveBeenCalledWith('1');
             expect(res.json).toHaveBeenCalledWith({ message: 'Brand deleted' });
         });
 
         it('should return 404 when brand not found', async () => {
-            // Arrange
             req.params.id = '999';
             mockFindByIdAndDelete.mockResolvedValue(null);
 
-            // Act
             await deleteBrand(req, res);
 
-            // Assert
             expect(res.status).toHaveBeenCalledWith(404);
             expect(res.json).toHaveBeenCalledWith({ error: 'Brand not found' });
         });
 
         it('should return 500 error when database fails', async () => {
-            // Arrange
+
             req.params.id = '1';
             mockFindByIdAndDelete.mockRejectedValue(new Error('Database error'));
 
-            // Act
             await deleteBrand(req, res);
 
-            // Assert
             expect(res.status).toHaveBeenCalledWith(500);
             expect(res.json).toHaveBeenCalledWith({ error: 'Failed to delete brand' });
         });
