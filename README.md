@@ -1,3 +1,8 @@
+Fazekas Botond, Élő Zalán László, Pintér Bálint
+13C
+
+
+
 📌 Projekt Leírás
 
 Ez a projekt egy egyszerű backend alkalmazás, amely alapvető CRUD műveleteket biztosít az alábbi végpontokon keresztül:
